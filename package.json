@@ -1,0 +1,25 @@
+{
+  "name": "js-mysql-react-todolist",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kosich/js-mysql-react-todolist.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kosich/js-mysql-react-todolist/issues"
+  },
+  "homepage": "https://github.com/kosich/js-mysql-react-todolist",
+  "devDependencies": {
+    "grunt": "^0.4.5"
+  },
+  "dependencies": {
+    "mysql2": "git://github.com/sidorares/node-mysql2"
+  }
+}
