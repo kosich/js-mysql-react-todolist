@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS todolist.todos (
 - при апдейте запись не блокируется, т.о. может одновременно сработать несколько апдейтов
 на одну запись
 - нет оповещения клиентов об изменениях в бд
+- при редактировании нажатие на enter генерирует два изменения ( скорее всего +1 на blur+change )
 
 _totally based on React [TodoMVC Example](http://todomvc.com/examples/react/)_
 
