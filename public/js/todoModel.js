@@ -31,7 +31,6 @@ var app = app || {};
         },
         inform : function inform () {
             this.onChanges.forEach(function (cb) { cb(); });
-            console.log( 'inform' );
         },
         addTodo : function addTodo(title) {
             var todo = extend( { title : title }, defaultTodo ),
@@ -72,9 +71,6 @@ var app = app || {};
                 type  : 'PUT'
             }).done( function( data ){
                 extend( todo, data );
-                console.log( 'updated', data );
-
-                console.log( self.todos.map( function( e ){ return e.done } ) );
 
                 self.inform();
             } ).fail( onFail );

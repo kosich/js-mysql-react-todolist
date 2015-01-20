@@ -41,9 +41,6 @@ var app = app || {};
             var self = this;
             $.get( '/items', function( data ){
 
-                // if status ok
-                console.log( 'initial fetch', data );
-
                 self.props.model.todos = data;
                 self.props.model.inform();
                 // TODO: how to properly run rerender?
