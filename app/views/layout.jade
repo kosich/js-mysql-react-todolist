@@ -1,0 +1,30 @@
+doctype html
+html
+    head
+        meta(charset='utf-8')
+        title React TodoMVC
+        link(rel='stylesheet', href='components/todomvc-common/base.css')
+    body
+
+        block content
+
+        footer(id="info")
+            p Double-click to edit a todo
+            p 
+                | Created by 
+                a(href="http://github.com/petehunt/") petehunt
+            p
+                | Part of 
+                a(href="http://todomvc.com") TodoMVC
+
+        script(src='components/jquery/dist/jquery.js')
+        script(src='components/react/react-with-addons.js')
+        script(src='components/react/JSXTransformer.js')
+        script(src='components/director/build/director.js')
+
+        script(src='js/utils.js')
+        script(src='js/todoModel.js')
+
+        script(type="text/jsx" src="js/todoItem.jsx")
+        script(type="text/jsx" src="js/footer.jsx")
+        script(type="text/jsx" src="js/app.jsx")

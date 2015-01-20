@@ -1,4 +1,37 @@
 # js-mysql-react-todolist
+
+###Инструкция по установке
+установить необходимые пакеты
+```shell
+npm install
+bower install
+```
+
+поднять бд
+```sql
+CREATE DATABASE IF NOT EXISTS todolist;
+
+CREATE TABLE IF NOT EXISTS todolist.todos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    title varchar(100) NOT NULL,
+    done BIT
+);
+```
+
+сконфигурировать connectionstring в `config/config.js`
+
+###Запуск
+`node`
+
+###Known issues
+
+- апдейт записей происходит только после упешного апдейта на сервере
+- при апдейте запись не блокируется, т.о. может одновременно сработать несколько апдейтов
+на одну запись
+- нет оповещения клиентов об изменениях в бд
+
+_totally based on React [TodoMVC Example](http://todomvc.com/examples/react/)_
+
 ## React TodoMVC Example
 
 > React is a JavaScript library for creating user interfaces. Its core principles are declarative code, efficiency, and flexibility. Simply specify what your component looks like and React will keep it up-to-date when the underlying data changes.

@@ -39,10 +39,10 @@ var app = app || {};
             router.init('/');
 
             var self = this;
-            $.get( '/data.json', function( data ){
+            $.get( '/items', function( data ){
 
                 // if status ok
-                console.log( 'initial fetch' );
+                console.log( 'initial fetch', data );
 
                 self.props.model.todos = data;
                 self.props.model.inform();
@@ -83,7 +83,7 @@ var app = app || {};
         edit: function (todo, callback) {
             // refer to todoItem.js `handleEdit` for the reasoning behind the
             // callback
-            this.setState({editing: todo._id}, function () {
+            this.setState({editing: todo.id}, function () {
                 callback();
             });
         },
@@ -109,9 +109,9 @@ var app = app || {};
             var shownTodos = todos.filter(function (todo) {
                 switch (this.state.nowShowing) {
                     case app.ACTIVE_TODOS:
-                        return !todo.completed;
+                        return !todo.done;
                     case app.COMPLETED_TODOS:
-                        return todo.completed;
+                        return todo.done;
                     default:
                         return true;
                 }
@@ -120,12 +120,12 @@ var app = app || {};
             var todoItems = shownTodos.map(function (todo) {
                 return (
                     <TodoItem
-                        key={todo._id}
+                        key={todo.id}
                         todo={todo}
                         onToggle={this.toggle.bind(this, todo)}
                         onDestroy={this.destroy.bind(this, todo)}
                         onEdit={this.edit.bind(this, todo)}
-                        editing={this.state.editing === todo._id}
+                        editing={this.state.editing === todo.id}
                         onSave={this.save.bind(this, todo)}
                         onCancel={this.cancel}
                     />
@@ -133,7 +133,7 @@ var app = app || {};
             }, this);
 
             var activeTodoCount = todos.reduce(function (accum, todo) {
-                return todo.completed ? accum : accum + 1;
+                return todo.done ? accum : accum + 1;
             }, 0);
 
             var completedCount = todos.length - activeTodoCount;

@@ -39,7 +39,10 @@ var app = app || {};
             if (event.which === ESCAPE_KEY) {
                 this.setState({editText: this.props.todo.title});
                 this.props.onCancel(event);
-            } else if (event.which === ENTER_KEY) {
+            }
+            else if (event.which === ENTER_KEY) {
+                // WARN : due to blurring and enter key
+                // happens double submission
                 this.handleSubmit(event);
             }
         },
@@ -52,32 +55,17 @@ var app = app || {};
             return {editText: this.props.todo.title};
         },
 
-        /**
-         * This is a completely optional performance enhancement that you can
-         * implement on any React component. If you were to delete this method
-         * the app would still work correctly (and still be very performant!), we
-         * just use it as an example of how little code it takes to get an order
-         * of magnitude performance improvement.
-         */
-        shouldComponentUpdate: function (nextProps, nextState) {
-            return (
-                nextProps.todo !== this.props.todo ||
-                nextProps.editing !== this.props.editing ||
-                nextState.editText !== this.state.editText
-            );
-        },
-
         render: function () {
             return (
                 <li className={React.addons.classSet({
-                    completed: this.props.todo.completed,
+                    done: this.props.todo.done,
                     editing: this.props.editing
                 })}>
                     <div className="view">
                         <input
                             className="toggle"
                             type="checkbox"
-                            checked={this.props.todo.completed}
+                            checked={this.props.todo.done}
                             onChange={this.props.onToggle}
                         />
                         <label onDoubleClick={this.handleEdit}>

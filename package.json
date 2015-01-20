@@ -1,10 +1,11 @@
 {
   "name": "js-mysql-react-todolist",
-  "version": "1.0.0",
+  "version": "0.0.1",
+  "private": true,
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "app.js"
   },
   "repository": {
     "type": "git",
@@ -16,10 +17,26 @@
     "url": "https://github.com/kosich/js-mysql-react-todolist/issues"
   },
   "homepage": "https://github.com/kosich/js-mysql-react-todolist",
-  "devDependencies": {
-    "grunt": "^0.4.5"
-  },
   "dependencies": {
-    "mysql2": "git://github.com/sidorares/node-mysql2"
+    "body-parser": "^1.10.1",
+    "errorhandler": "^1.3.2",
+    "express": "^4.11.0",
+    "express-session": "^1.10.1",
+    "jade": "^1.9.1",
+    "method-override": "^2.3.1",
+    "morgan": "^1.5.1",
+    "multer": "^0.1.7",
+    "mysql": "~2.0.0-alpha9",
+    "orm": "~2.1.3",
+    "serve-favicon": "^2.2.0"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-develop": "~0.1.1",
+    "grunt-contrib-watch": "~0.4.4",
+    "grunt-contrib-compass": "~0.2.0",
+    "request": "~2.22.0",
+    "time-grunt": "~0.1.1",
+    "load-grunt-tasks": "~0.2.0"
   }
 }

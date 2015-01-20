@@ -30,75 +30,83 @@ var app = app || {};
             this.onChanges.push(onChange);
         },
         inform : function inform () {
-            // TODO: save items
-            // Utils.store(this.key, this.todos);
             this.onChanges.forEach(function (cb) { cb(); });
+            console.log( 'inform' );
         },
         addTodo : function addTodo(title) {
             var todo = extend( { title : title }, defaultTodo ),
                 self = this;
 
+            // TODO: moveout ajax rest communication to a Manager
+            // TODO: add changing queque with disabling items, being updated
             $.ajax( '/items', {
                 cache : false,
                 data  : todo,
                 type  : 'POST'
-            } ).done( function( _id ){
-                todo._id = _id;
-                data.push( todo );
+            } ).done( function( item ){
+                todo.id = item.id;
+
+                self.todos.push( todo );
 
                 self.inform();
             } ).fail( onFail );
         },
         toggleAll : function (checked) {
-            // Note: it's usually better to use immutable data structures since they're
-            // easier to reason about and React works very well with them. That's why
-            // we use map() and filter() everywhere instead of mutating the array or
-            // todo items themselves.
-            this.todos = this.todos.map(function (todo) {
-                return Utils.extend({}, todo, {completed: checked});
-            });
-
-            this.inform();
+            var self = this;
+            this.todos.forEach( function( todo ){
+                self.toggle(todo, checked);
+            } );
         },
 
-        toggle : function ( todo ) {
+        toggle : function ( todo, value /* optional */ ) {
             var self = this;
 
-            $.ajax( '/items/' + todo._id , {
+            // invert `done` or set to passed value
+            if ( value === undefined  ){
+                value = !todo.done;
+            }
+
+            $.ajax( '/items/' + todo.id , {
                 cache : false,
-                data  : { done : todo.done },
+                data  : { done : value },
                 type  : 'PUT'
-            }).done( function(  ){
-                todo.done = !todo.done;
+            }).done( function( data ){
+                extend( todo, data );
+                console.log( 'updated', data );
+
+                console.log( self.todos.map( function( e ){ return e.done } ) );
+
                 self.inform();
-            } );
+            } ).fail( onFail );
 
         },
 
         destroy : function (todo) {
             var self = this;
 
-            $.ajax( '/items/' + todo._id , {
+            $.ajax( '/items/' + todo.id , {
                 cache : false,
                 type  : 'DELETE'
             }).done( function(  ){
                 self.todos.splice( self.todos.indexOf( todo ), 1 );
                 self.inform();
-            } );
+            } ).fail( onFail );
 
         },
 
         save : function (todo, title) {
             var self = this;
 
-            $.ajax( '/items/' + todo._id , {
+            $.ajax( '/items/' + todo.id , {
                 cache : false,
                 data  : { title : title },
                 type  : 'PUT'
-            }).done( function(  ){
-                todo.title = title;
+            }).done( function( data ){
+
+                extend( todo, data );
                 self.inform();
-            } );
+
+            } ).fail( onFail );
         },
 
         clearCompleted : function () {

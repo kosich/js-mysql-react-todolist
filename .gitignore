@@ -2,7 +2,7 @@
 *.sw*
 
 # bower
-bower_components
+public/components
 
 # Logs
 logs
