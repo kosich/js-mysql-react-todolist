@@ -106,8 +106,11 @@ var app = app || {};
         },
 
         clearCompleted : function () {
-            this.todos = this.todos.filter(function (todo) {
-                return !todo.completed;
+            var self = this;
+            this.todos.forEach(function (todo) {
+                if ( todo.done ){
+                    self.destroy( todo );
+                }
             });
 
             this.inform();
@@ -116,7 +119,8 @@ var app = app || {};
     });
 
 
-    function onFail (){
+    function onFail ( err ){
+        console.error( err );
     }
 
     app.TodoModel = TodoModel;

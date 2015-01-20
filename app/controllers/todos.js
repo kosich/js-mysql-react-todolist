@@ -10,7 +10,8 @@ list.route('/items')
         Todos.find(function(err, items){
             if(err){ return next(err); }
 
-            res.json(items);
+            res.json( items );
+
         });
     })
     .post(function( req, res, next ) {

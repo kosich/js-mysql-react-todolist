@@ -43,8 +43,6 @@ var app = app || {};
 
                 self.props.model.todos = data;
                 self.props.model.inform();
-                // TODO: how to properly run rerender?
-                // self.setState();
 
             } );
         },
